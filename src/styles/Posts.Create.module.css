@@ -71,6 +71,31 @@
   filter: brightness(0.8);
 }
 
+.purpleCard, .blueCard, .yellowCard {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.cardsColor {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.purpleCard {
+  background-color: #a386f3;
+}
+
+.blueCard {
+  background-color: #547BD9;
+}
+
+.yellowCard {
+  background-color: #EC9C7F;
+}
+
 @keyframes item-render {
   from {
     opacity: 0;

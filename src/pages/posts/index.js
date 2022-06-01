@@ -27,7 +27,7 @@ export default function Posts({ posts }) {
     <div className={styles.posts}>
       {posts.map(post => (
         <Link key={post.id} href={`/posts/${post.id}`}>
-          <div className={styles.post}>
+          <div className={styles.post} style={{ backgroundColor: post.color }}>
             <h3>{post.title}</h3>
             <p>{post.content}</p>
           </div>

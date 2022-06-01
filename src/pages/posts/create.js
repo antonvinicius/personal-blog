@@ -9,15 +9,16 @@ export default function Create({ setPosts, posts }) {
 
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
+  const [color, setColor] = useState("")
 
   function handleSubmit() {
-    if (!title || !content) {
+    if (!title || !content || !color) {
       alert("Por favor, digite os valores")
       return
     }
 
     const newPosts = [...posts]
-    newPosts.push({ title, content, id: uuid() })
+    newPosts.push({ title, content, id: uuid(), color })
     setPosts(newPosts)
     router.push('/posts')
   }
@@ -26,6 +27,30 @@ export default function Create({ setPosts, posts }) {
     <div className={styles.container}>
       <h2>Criar um novo post</h2>
       <div className={styles.form}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="color">Cor do cartão</label>
+          <div className={styles.cardsColor}>
+            <div
+              className={styles.purpleCard}
+              style={{
+                border: color === '#a386f3' ? '3px solid' : 'none'
+              }}
+              onClick={() => setColor("#a386f3")}></div>
+            <div
+              className={styles.blueCard}
+              style={{
+                border: color === '#547BD9' ? '3px solid' : 'none'
+              }}
+              onClick={() => setColor("#547BD9")}></div>
+            <div
+              className={styles.yellowCard}
+              style={{
+                border: color === '#EC9C7F' ? '3px solid' : 'none'
+              }}
+              onClick={() => setColor("#EC9C7F")}></div>
+          </div>
+        </div>
+
         <div className={styles.inputGroup}>
           <label className={styles.label} htmlFor="title">Título do post</label>
           <input className={styles.input} type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
