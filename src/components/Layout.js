@@ -12,7 +12,7 @@ export function Layout({ children }) {
               <a className={styles.navLink}>Posts</a>
             </Link>
             <Link href="/posts/create">
-              <a className={styles.navLink}>Criar novo post</a>
+              <a className={styles.navLink}>Criar</a>
             </Link>
           </nav>
         </div>
