@@ -32,11 +32,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation-name: item-render;
+  animation-duration: 2s;
 }
 
 .noPostsText {
   text-align: center;
   font-size: 22px;
+  position: relative;
 }
 
 .textDiff, .actionText {
@@ -51,6 +54,51 @@
 
 .actionText:hover {
   filter: brightness(1);
+}
+
+.emoji {
+  bottom: -3px;
+  right: -40px;
+  position: absolute;
+  cursor: pointer;
+  font-size: 30px;
+  animation-name: emoji-animation;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(.35,.48,.81,.85);
+}
+
+.emoji:hover {
+  animation-name: emoji-360;
+  animation-duration: 0.5s;
+}
+
+@keyframes emoji-360 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes emoji-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 @keyframes item-render {

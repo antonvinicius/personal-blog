@@ -17,7 +17,7 @@ export default function Posts({ posts }) {
           <Link href="/posts/create">
             <span className={styles.actionText}>clique aqui </span>
           </Link>
-          e crie um agora mesmo 😁
+          e crie um agora mesmo <span className={styles.emoji}>😁</span>
         </p>
       </div>
     )
