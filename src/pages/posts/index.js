@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../../styles/Posts.module.css'
 import image from '../../../public/undraw_handcrafts_bookmark.svg'
+import { PrismaClient } from '@prisma/client'
 
 export default function Posts({ posts }) {
   if (posts.length === 0) {
@@ -35,4 +36,27 @@ export default function Posts({ posts }) {
       ))}
     </div>
   )
+}
+
+export async function getStaticProps() {
+  let posts = []
+  const prisma = new PrismaClient()
+  async function connectDatabase() {
+    await prisma.$connect()
+    // Todo get all posts
+    posts = await prisma.post.findMany()
+  }
+
+  await connectDatabase()
+    .catch((e) => {
+      throw e
+    })
+    .finally(async () => {
+      await prisma.$disconnect()
+    })
+  return {
+    props: {
+      posts
+    }
+  }
 }
