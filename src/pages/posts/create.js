@@ -11,6 +11,11 @@ export default function Create({ setPosts, posts }) {
   const [content, setContent] = useState("")
 
   function handleSubmit() {
+    if (!title || !content) {
+      alert("Por favor, digite os valores")
+      return
+    }
+
     const newPosts = [...posts]
     newPosts.push({ title, content, id: uuid() })
     setPosts(newPosts)
@@ -22,8 +27,8 @@ export default function Create({ setPosts, posts }) {
       <h2>Criar um novo post</h2>
       <div className={styles.form}>
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="title">Title</label>
-          <input className={styles.input} type="text" id="title" placeholder="Um ótimo título" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <label className={styles.label} htmlFor="title">Título do post</label>
+          <input className={styles.input} type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
 
         <div className={styles.inputGroup}>

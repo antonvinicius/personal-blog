@@ -6,7 +6,7 @@ export function Layout({ children }) {
     <>
       <div className={styles.outMenu}>
         <div className={styles.menu}>
-          <h1 className={styles.menuTitle}>Meu Blog</h1>
+          <h1 className={styles.menuTitle}>Meu Diário</h1>
           <nav>
             <Link href="/posts">
               <a className={styles.navLink}>Posts</a>

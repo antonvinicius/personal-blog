@@ -26,6 +26,33 @@
   }
 }
 
+.noPostsContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.noPostsText {
+  text-align: center;
+  font-size: 22px;
+}
+
+.textDiff, .actionText {
+  color: #A386F3;
+  font-weight: bold;
+  filter: brightness(0.6);
+}
+
+.actionText {
+  cursor: pointer;
+}
+
+.actionText:hover {
+  filter: brightness(1);
+}
+
 @keyframes item-render {
   from {
     opacity: 0;
