@@ -1,0 +1,26 @@
+.posts {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 25px;
+}
+
+.post {
+  color: #010101;
+  width: 300px;
+  background-color: #A386F3;
+  border-radius: 5px;
+  padding: 1px 10px;
+  transition: transform 1s, filter 1s;
+  cursor: pointer;
+}
+
+.post:hover {
+  transform: scale(1.05);
+  filter: brightness(0.9);
+}
+
+@media (max-width: 768px) {
+  .posts {
+    grid-template-columns: 1fr;
+  }
+}
