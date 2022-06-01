@@ -40,6 +40,7 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: bold;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 @keyframes item-render {
