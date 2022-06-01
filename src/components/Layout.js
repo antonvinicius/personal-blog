@@ -8,10 +8,10 @@ export function Layout({ children }) {
         <div className={styles.menu}>
           <h1 className={styles.menuTitle}>Meu Blog</h1>
           <nav>
-            <Link href="/">
+            <Link href="/posts">
               <a className={styles.navLink}>Posts</a>
             </Link>
-            <Link href="#">
+            <Link href="/posts/create">
               <a className={styles.navLink}>Criar novo post</a>
             </Link>
           </nav>
