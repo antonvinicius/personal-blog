@@ -1,10 +1,11 @@
+import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
 import styles from '../../styles/Posts.Create.module.css'
 
-export default function Create({ setPosts, posts }) {
+export default function Create() {
   const router = useRouter()
 
   const [title, setTitle] = useState("")
@@ -17,9 +18,7 @@ export default function Create({ setPosts, posts }) {
       return
     }
 
-    const newPosts = [...posts]
-    newPosts.push({ title, content, id: uuid(), color })
-    setPosts(newPosts)
+    axios.post('/api/posts', { title, content, color })
     router.push('/posts')
   }
 
