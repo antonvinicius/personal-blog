@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+  <img src="public/diary.png" width="200" />
+  <h2>Meu Diário</h2>
+  
+  <p align="center">
+    Um CRUD de posts com título, conteúdo e cor do cartão!
+    <br />
+    <a href="https://personal-blog-sage-seven.vercel.app/">Acessar aplicação</a>
+    ·
+    <a href="https://github.com/antonvinicius/personal-blog/edit/issues">Reportar Bug</a>
+    ·
+    <a href="https://github.com/antonvinicius/personal-blog/edit/issues">Pedir nova feature</a>
+  </p>
+</div>
 
-## Getting Started
+## Sobre o projeto 📐
 
-First, run the development server:
+[![Meu Diario Screen Shot][product-gif]](https://personal-blog-sage-seven.vercel.app/)
+[![Meu Diario Screen Shot][product-screenshot]](https://personal-blog-sage-seven.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Este aplicativo web é um cadastro de Posts, para servir como um diário. Você pode livremente cadastrar qualquer post e escolher uma cor para o cartão desejado. A ideia é bem simples. Porém, desenvolvi para praticar meus conhecimentos em programação. A interface na minha opinião está bem moderna e minimalista, que era o objetivo deste app.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Tecnologias utilizadas 🧪
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+* [Next.js](https://nextjs.org/)
+* [Prisma](https://www.prisma.io/)
+* [MongoDB](https://www.mongodb.com/pt-br)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<!-- GETTING STARTED -->
+## For Devs 👨‍💻
 
-## Learn More
+Estas são as instruções para rodar o projeto localmente em sua máquina.
 
-To learn more about Next.js, take a look at the following resources:
+### Requisitos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* yarn
+* NodeJS
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Instalação
 
-## Deploy on Vercel
+1. Tenha uma instância do MongoDB
+2. Clone o repositório
+   ```sh
+   git clone https://github.com/antonvinicius/personal-blog.git
+   ```
+3. Instale as dependências
+   ```sh
+   yarn
+   ```
+4. Crie um arquivo `.env` na raiz do projeto e coloque o seguinte conteúdo dentro
+   ```sh
+   DATABASE_URL=mongodb+srv://<usuario>:<senha>@<host>/mydiary
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<!-- MARKDOWN LINKS & IMAGES -->
+[product-gif]: github/assets/app.gif
+[product-screenshot]: github/assets/mockup.png
