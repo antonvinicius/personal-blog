@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Loader from "react-spinners/BeatLoader";
+import Head from 'next/head'
 
 import styles from '../../styles/Posts.Edit.module.css'
 import axios from 'axios'
@@ -73,11 +74,21 @@ export default function Edit() {
   }, [])
 
   if (loading) {
-    return <Loader color={"#a386f3"} css={override} loading={loading} size={40} />
+    return (
+      <>
+        <Head>
+          <title>Editar Post</title>
+        </Head>
+        <Loader color={"#a386f3"} css={override} loading={loading} size={40} />
+      </>
+    )
   }
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Editar Post</title>
+      </Head>
       <h2>Editar post</h2>
       <div className={styles.form}>
         <div className={styles.inputGroup}>

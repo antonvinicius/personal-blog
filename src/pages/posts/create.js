@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Loader from "react-spinners/BeatLoader";
+import Head from 'next/head'
 
 import styles from '../../styles/Posts.Create.module.css'
 
@@ -39,6 +40,9 @@ export default function Create() {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Criar Post</title>
+      </Head>
       <h2>Criar um novo post</h2>
       <div className={styles.form}>
         <div className={styles.inputGroup}>

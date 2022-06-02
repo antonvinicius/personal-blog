@@ -5,6 +5,7 @@ import styles from '../../styles/Posts.module.css'
 import image from '../../../public/undraw_handcrafts_bookmark.svg'
 import axios from 'axios'
 import Loader from "react-spinners/PulseLoader";
+import Head from 'next/head'
 
 const override = {
   display: "flex",
@@ -34,13 +35,21 @@ export default function Posts() {
 
   if (loading) {
     return (
-      <Loader color={"#a386f3"} loading={loading} css={override} size={40} />
+      <>
+        <Head>
+          <title>Meu Diário</title>
+        </Head>
+        <Loader color={"#a386f3"} loading={loading} css={override} size={40} />
+      </>
     )
   }
 
   if (posts.length === 0) {
     return (
       <div className={styles.noPostsContainer}>
+        <Head>
+          <title>Meu Diário</title>
+        </Head>
         <Image
           src={image}
           alt="Imagem de um livro"
@@ -59,6 +68,9 @@ export default function Posts() {
 
   return (
     <div className={styles.posts}>
+      <Head>
+        <title>Meu Diário</title>
+      </Head>
       {posts.map(post => (
         <Link key={post.id} href={`/posts/${post.id}`}>
           <div className={styles.post} style={{ backgroundColor: post.color }}>
