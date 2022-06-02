@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Loader from "react-spinners/BeatLoader";
 
 import styles from '../../styles/Posts.Edit.module.css'
 import axios from 'axios'
+
+const override = {
+  display: "flex",
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: "0 auto",
+};
 
 export default function Edit() {
   const router = useRouter()
@@ -12,37 +20,61 @@ export default function Edit() {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [color, setColor] = useState("")
+  const [loading, setLoading] = useState(true)
 
   async function handleEdit() {
     if (!title || !content || !color) {
       alert("Por favor, digite os valores")
       return
     }
-    await axios.put(`/api/posts/${id}`, {
-      title,
-      content: description,
-      color
-    })
-
-    router.push('/posts')
+    try {
+      setLoading(true)
+      await axios.put(`/api/posts/${id}`, {
+        title,
+        content: description,
+        color
+      })
+    } catch (error) {
+      throw new Error("failed updating post")
+    } finally {
+      setLoading(false)
+      router.push('/posts')
+    }
   }
 
   async function handleDelete() {
-    await axios.delete(`/api/posts/${id}`)
-    router.push('/posts')
+    try {
+      setLoading(true)
+      await axios.delete(`/api/posts/${id}`)
+    } catch (error) {
+      throw new Error("failed deleting post")
+    } finally {
+      setLoading(false)
+      router.push('/posts')
+    }
   }
 
   async function getPost() {
-    const { data } = await axios.get(`/api/posts/${id}`)
-    setPost(data)
-    setTitle(data.title)
-    setDescription(data.content)
-    setColor(data.color)
+    try {
+      const { data } = await axios.get(`/api/posts/${id}`)
+      setPost(data)
+      setTitle(data.title)
+      setDescription(data.content)
+      setColor(data.color)
+    } catch (error) {
+      throw new Error("failed fatching post")
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
     getPost()
   }, [])
+
+  if (loading) {
+    return <Loader color={"#a386f3"} css={override} loading={loading} size={40} />
+  }
 
   return (
     <div className={styles.container}>

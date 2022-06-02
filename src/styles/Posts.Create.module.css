@@ -67,6 +67,11 @@
   transition: filter 1s;
 }
 
+.formButton:disabled {
+  opacity: 0.2;
+  filter: brightness(0.3);
+}
+
 .formButton:hover {
   filter: brightness(0.8);
 }

@@ -4,18 +4,39 @@ import { useState, useEffect } from 'react'
 import styles from '../../styles/Posts.module.css'
 import image from '../../../public/undraw_handcrafts_bookmark.svg'
 import axios from 'axios'
+import Loader from "react-spinners/PulseLoader";
+
+const override = {
+  display: "flex",
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: "0 auto",
+};
 
 export default function Posts() {
   const [posts, setPosts] = useState([])
+  const [loading, setLoading] = useState(true)
 
   async function getPosts() {
-    const { data } = await axios.get('/api/posts')
-    setPosts(data)
+    try {
+      const { data } = await axios.get('/api/posts')
+      setPosts(data)
+    } catch (error) {
+      throw new Error("Error fetching data")
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
     getPosts()
   }, [])
+
+  if (loading) {
+    return (
+      <Loader color={"#a386f3"} loading={loading} css={override} size={40} />
+    )
+  }
 
   if (posts.length === 0) {
     return (

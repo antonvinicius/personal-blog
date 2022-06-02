@@ -1,9 +1,16 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { v4 as uuid } from 'uuid'
+import Loader from "react-spinners/BeatLoader";
 
 import styles from '../../styles/Posts.Create.module.css'
+
+const override = {
+  display: "flex",
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: "0 auto",
+};
 
 export default function Create() {
   const router = useRouter()
@@ -11,15 +18,23 @@ export default function Create() {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [color, setColor] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (!title || !content || !color) {
       alert("Por favor, digite os valores")
       return
     }
 
-    axios.post('/api/posts', { title, content, color })
-    router.push('/posts')
+    try {
+      setLoading(true)
+      await axios.post('/api/posts', { title, content, color })
+    } catch (error) {
+      throw new Error("failed creating post")
+    } finally {
+      setLoading(false)
+      router.push('/posts')
+    }
   }
 
   return (
@@ -61,9 +76,12 @@ export default function Create() {
         </div>
 
         <div className={styles.buttonContainer}>
-          <button className={styles.formButton} type="button" onClick={handleSubmit} id="submit">Cadastrar</button>
+          <button className={styles.formButton} disabled={loading} type="button" onClick={handleSubmit} id="submit">
+            Cadastrar
+          </button>
         </div>
       </div>
+      <Loader color={"#a386f3"} css={override} loading={loading} size={40} />
     </div>
   )
 }
