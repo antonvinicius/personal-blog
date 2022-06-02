@@ -1,10 +1,22 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import styles from '../../styles/Posts.module.css'
 import image from '../../../public/undraw_handcrafts_bookmark.svg'
-import { PrismaClient } from '@prisma/client'
+import axios from 'axios'
 
-export default function Posts({ posts }) {
+export default function Posts() {
+  const [posts, setPosts] = useState([])
+
+  async function getPosts() {
+    const { data } = await axios.get('/api/posts')
+    setPosts(data)
+  }
+
+  useEffect(() => {
+    getPosts()
+  }, [])
+
   if (posts.length === 0) {
     return (
       <div className={styles.noPostsContainer}>
@@ -36,27 +48,4 @@ export default function Posts({ posts }) {
       ))}
     </div>
   )
-}
-
-export async function getStaticProps() {
-  let posts = []
-  const prisma = new PrismaClient()
-  async function connectDatabase() {
-    await prisma.$connect()
-    // Todo get all posts
-    posts = await prisma.post.findMany()
-  }
-
-  await connectDatabase()
-    .catch((e) => {
-      throw e
-    })
-    .finally(async () => {
-      await prisma.$disconnect()
-    })
-  return {
-    props: {
-      posts
-    }
-  }
 }

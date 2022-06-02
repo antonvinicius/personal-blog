@@ -15,11 +15,17 @@ export default async function handler(req, res) {
         color
       },
     })
+    await prisma.$disconnect()
 
     return res.status(201).send()
-  } else if (req.method === 'PUT') {
+  }
+  if (req.method === 'GET') {
 
-  } else if (req.method === 'DELETE') {
+    await prisma.$connect()
 
+    const posts = await prisma.post.findMany()
+    await prisma.$disconnect()
+
+    return res.status(201).json(posts)
   }
 }

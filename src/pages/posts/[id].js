@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import styles from '../../styles/Posts.Edit.module.css'
+import axios from 'axios'
 
-export default function Edit({ posts, setPosts }) {
+export default function Edit() {
   const router = useRouter()
   const { id } = router.query
 
@@ -12,43 +13,36 @@ export default function Edit({ posts, setPosts }) {
   const [description, setDescription] = useState("")
   const [color, setColor] = useState("")
 
-  function handleEdit() {
+  async function handleEdit() {
     if (!title || !content || !color) {
       alert("Por favor, digite os valores")
       return
     }
+    await axios.put(`/api/posts/${id}`, {
+      title,
+      content: description,
+      color
+    })
 
-    const editPost = { ...post }
-
-    editPost.title = title
-    editPost.content = description
-    editPost.color = color
-
-    const dbPosts = [...posts]
-    const postToEdit = dbPosts.findIndex(post => post.id === id)
-    dbPosts[postToEdit] = editPost
-    setPosts(dbPosts)
     router.push('/posts')
   }
 
-  function handleDelete() {
-    const dbPosts = [...posts]
-    const postToRemove = dbPosts.findIndex(post => post.id === id)
-    dbPosts.splice(postToRemove, 1)
-    setPosts(dbPosts)
+  async function handleDelete() {
+    await axios.delete(`/api/posts/${id}`)
     router.push('/posts')
+  }
+
+  async function getPost() {
+    const { data } = await axios.get(`/api/posts/${id}`)
+    setPost(data)
+    setTitle(data.title)
+    setDescription(data.content)
+    setColor(data.color)
   }
 
   useEffect(() => {
-    const dbPost = posts.find(post => post.id === id)
-    if (dbPost) {
-      setPost(dbPost)
-      setTitle(dbPost.title)
-      setDescription(dbPost.content)
-      setColor(dbPost.color)
-    }
-
-  }, [id, posts])
+    getPost()
+  }, [])
 
   return (
     <div className={styles.container}>
